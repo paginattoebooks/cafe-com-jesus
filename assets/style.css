@@ -103,6 +103,127 @@ p { margin: 0; }
 @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
 @keyframes steam { 0% { opacity: 0; transform: translateY(6px); } 40% { opacity: .9; } 100% { opacity: 0; transform: translateY(-10px); } }
 
+/* ---------- SEÇÃO 00 — Depoimento em vídeo (abertura) ---------- */
+.story {
+  --story-bg: #F9F4EC;
+  --story-ink: #4A2E20;
+  --story-gold: #CDA765;
+  position: relative; overflow: hidden;
+  padding: 28px 0 40px;
+  text-align: center; color: var(--story-ink);
+  background:
+    radial-gradient(80% 42% at 50% 0%, rgba(205, 167, 101, .16) 0%, rgba(249, 244, 236, 0) 70%),
+    radial-gradient(60% 40% at 100% 55%, rgba(199, 151, 141, .10) 0%, rgba(249, 244, 236, 0) 70%),
+    linear-gradient(180deg, var(--story-bg) 0%, #FDFAF5 55%, var(--cream) 100%);
+}
+.story-inner { position: relative; z-index: 1; padding: 0 14px; }
+
+.story-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 16px; border: 1px solid rgba(205, 167, 101, .55); border-radius: 999px;
+  background: rgba(255, 255, 255, .55);
+  font-size: .72rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--coffee);
+  animation: storyFade .6s ease both;
+}
+.story-tag span { color: var(--story-gold); letter-spacing: 0; }
+
+.story-title {
+  margin: 14px auto 0; max-width: 620px;
+  font-size: clamp(1.9rem, 8.4vw, 3.1rem); line-height: 1.1;
+  color: var(--story-ink);
+  animation: storyUp .8s .1s ease both;
+}
+.story-title em { font-style: italic; color: var(--coffee); white-space: nowrap; }
+.story-accent {
+  font-style: italic;
+  background-image: linear-gradient(transparent 68%, rgba(205, 167, 101, .32) 68%, rgba(205, 167, 101, .32) 92%, transparent 92%);
+  -webkit-box-decoration-break: clone; box-decoration-break: clone;
+}
+
+.story-sub {
+  margin: 12px auto 0; max-width: 520px;
+  font-size: .95rem; line-height: 1.6; color: var(--text-soft);
+  animation: storyUp .8s .2s ease both;
+}
+.story-hint {
+  display: inline-flex; align-items: center; gap: 10px;
+  margin-top: 16px;
+  font-family: var(--font-serif); font-style: italic; font-size: 1.15rem; font-weight: 600;
+  color: var(--coffee);
+  animation: storyFade .8s .3s ease both;
+}
+.story-play {
+  display: inline-grid; place-items: center; width: 26px; height: 26px; border-radius: 50%;
+  border: 1px solid var(--story-gold); color: var(--story-gold);
+  font-family: var(--font-sans); font-style: normal; font-size: .62rem; padding-left: 2px;
+}
+
+.story-video {
+  width: 100%; max-width: 480px;
+  margin: 16px auto 0; padding: 6px;
+  border: 1px solid rgba(205, 167, 101, .6); border-radius: 26px;
+  background: linear-gradient(180deg, #FFFDF9 0%, #F6EEE2 100%);
+  box-shadow: 0 30px 60px -38px rgba(74, 46, 32, .45), 0 10px 24px -20px rgba(74, 46, 32, .25);
+  animation: storyZoom .9s .35s ease both;
+}
+.story-video video {
+  display: block; width: 100%; height: auto; aspect-ratio: 9 / 16;
+  border-radius: 20px; background: var(--beige-soft);
+  object-fit: contain;
+}
+
+.story-after {
+  margin: 26px auto 0; max-width: 440px;
+  font-family: var(--font-serif); font-style: italic; font-size: 1.35rem; line-height: 1.35;
+  color: var(--story-ink);
+}
+.story-next {
+  display: inline-flex; flex-direction: column; align-items: center; gap: 6px;
+  margin-top: 18px;
+  font-size: .78rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--coffee); text-decoration: none;
+}
+.story-next::before { content: "✦"; color: var(--story-gold); letter-spacing: 0; font-size: .8rem; }
+.story-next svg {
+  width: 22px; height: 22px; fill: none; stroke: var(--story-gold); stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round;
+  animation: storyNudge 2.4s ease-in-out infinite;
+}
+.story-next:focus-visible { outline: 3px solid var(--gold); outline-offset: 4px; border-radius: 8px; }
+
+/* Ornamentos sutis */
+.story-deco { position: absolute; z-index: 0; fill: none; stroke: var(--story-gold); stroke-width: 1.2; stroke-linecap: round; opacity: .35; pointer-events: none; }
+.story-deco--leaf { width: 92px; top: 10px; left: -22px; transform: rotate(-8deg); }
+.story-deco--bean { width: 34px; top: 46%; right: 6px; transform: rotate(24deg); opacity: .28; }
+.story-spark { position: absolute; z-index: 0; color: var(--story-gold); opacity: .5; pointer-events: none; font-size: .8rem; }
+.story-spark--1 { top: 18px; right: 14%; }
+.story-spark--2 { top: 38%; left: 5%; font-size: .6rem; }
+.story-spark--3 { bottom: 16%; right: 8%; font-size: .7rem; }
+
+@keyframes storyFade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes storyUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes storyZoom { from { opacity: 0; transform: scale(.96); } to { opacity: 1; transform: none; } }
+@keyframes storyNudge { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(4px); } }
+
+@media (min-width: 480px) {
+  .story-sub { font-size: 1rem; }
+}
+@media (min-width: 768px) {
+  .story { padding: 56px 0 64px; }
+  .story-inner { padding: 0 var(--gutter); }
+  .story-tag { font-size: .76rem; }
+  .story-title { margin-top: 18px; }
+  .story-sub { margin-top: 16px; font-size: 1.06rem; }
+  .story-hint { margin-top: 22px; }
+  /* vertical: 440–480px, sem passar da altura da tela */
+  .story-video { margin-top: 22px; width: max(440px, calc(88svh * 9 / 16)); padding: 8px; border-radius: 30px; }
+  .story-video video { border-radius: 22px; }
+  .story-after { margin-top: 34px; font-size: 1.55rem; }
+  .story-deco--leaf { width: 150px; top: 40px; left: 6%; }
+  .story-deco--bean { width: 48px; right: 10%; }
+  .story-spark--2 { left: 16%; }
+}
+
 /* ---------- SEÇÃO 01 — Barra de oferta ---------- */
 .topbar {
   background: var(--coffee); color: var(--cream);
